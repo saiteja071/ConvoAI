@@ -1,6 +1,6 @@
-const { rateLimit } = require('express-rate-limit');
+const { rateLimit, ipKeyGenerator } = require('express-rate-limit');
 
-const getKey = (req) => req.user?.id || req.ip;
+const getKey = (req) => req.user?.id || ipKeyGenerator(req.ip);
 
 const activeStreams = new Map();
 

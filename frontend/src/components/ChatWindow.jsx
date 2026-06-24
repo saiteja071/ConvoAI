@@ -110,28 +110,30 @@ const ChatWindow = ({ onMessageSent }) => {
           if (trimmed.startsWith('data:')) {
             const dataStr = trimmed.substring(5).trim();
             if (dataStr) {
+              let parsed;
               try {
-                const parsed = JSON.parse(dataStr);
-                
-                if (parsed.error) {
-                  throw new Error(parsed.error);
-                }
-                
-                if (parsed.text) {
-                  const textChunk = parsed.text;
-                  setChat((prev) => {
-                    if (!prev) return prev;
-                    const updatedMessages = prev.messages.map((msg) => {
-                      if (msg._id === optimisticAiMsg._id) {
-                        return { ...msg, content: msg.content + textChunk };
-                      }
-                      return msg;
-                    });
-                    return { ...prev, messages: updatedMessages };
+                parsed = JSON.parse(dataStr);
+              } catch (parseErr) {
+                console.error('Failed to parse stream chunk:', dataStr, parseErr);
+                continue;
+              }
+
+              if (parsed.error) {
+                throw new Error(parsed.error);
+              }
+
+              if (parsed.text) {
+                const textChunk = parsed.text;
+                setChat((prev) => {
+                  if (!prev) return prev;
+                  const updatedMessages = prev.messages.map((msg) => {
+                    if (msg._id === optimisticAiMsg._id) {
+                      return { ...msg, content: msg.content + textChunk };
+                    }
+                    return msg;
                   });
-                }
-              } catch (err) {
-                console.error('Failed to parse stream chunk:', dataStr, err);
+                  return { ...prev, messages: updatedMessages };
+                });
               }
             }
           }
