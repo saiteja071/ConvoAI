@@ -18,7 +18,7 @@ const Chat = () => {
 
   const fetchChats = async () => {
     try {
-      const res = await api.get('/api/chats');
+      const res = await api.get('/chats');
       setChats(res.data);
     } catch (err) {
       console.error('Failed to load chats list', err);
@@ -27,7 +27,7 @@ const Chat = () => {
 
   const handleCreateChat = async () => {
     try {
-      const res = await api.post('/api/chats');
+      const res = await api.post('/chats');
       await fetchChats();
       navigate(`/chat/${res.data._id}`);
     } catch (err) {
@@ -37,7 +37,7 @@ const Chat = () => {
 
   const handleDeleteChat = async (chatId) => {
     try {
-      await api.delete(`/api/chats/${chatId}`);
+      await api.delete(`/chats/${chatId}`);
       await fetchChats();
       if (id === chatId) {
         navigate('/chat');

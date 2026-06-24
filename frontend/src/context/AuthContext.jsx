@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const res = await api.get('/api/auth/me');
+          const res = await api.get('/auth/me');
           setUser(res.data);
         } catch (err) {
           console.error('Failed to load user', err);
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await api.post('/api/auth/login', { email, password });
+      const res = await api.post('/auth/login', { email, password });
       const { token, user: userData } = res.data;
       localStorage.setItem('token', token);
       setUser(userData);
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      await api.post('/api/auth/register', { name, email, password });
+      await api.post('/auth/register', { name, email, password });
       return { success: true };
     } catch (err) {
       const validationErrors = err.response?.data?.errors;

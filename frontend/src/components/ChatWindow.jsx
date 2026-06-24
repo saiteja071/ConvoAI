@@ -26,7 +26,7 @@ const ChatWindow = ({ onMessageSent }) => {
     const fetchChat = async () => {
       setLoading(true);
       try {
-        const res = await api.get(`/api/chats/${id}`);
+        const res = await api.get(`/chats/${id}`);
         setChat(res.data);
       } catch (err) {
         console.error('Error fetching chat history', err);
@@ -75,7 +75,7 @@ const ChatWindow = ({ onMessageSent }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${BASE_URL}/api/chats/${id}/message/stream`, {
+      const response = await fetch(`${BASE_URL}/chats/${id}/message/stream`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

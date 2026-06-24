@@ -23,6 +23,7 @@ PORT=7000
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
 GEMINI_API_KEY=your_gemini_api_key
+CLIENT_URL= #deployed frontend url
 ```
 
 ```bash
@@ -38,7 +39,7 @@ npm install
 
 Create a `.env` file:
 ```
-VITE_API_URL=http://localhost:7000
+VITE_API_URL= #deployed backend url
 ```
 
 ```bash
