@@ -1,5 +1,6 @@
 const { GoogleGenAI } = require('@google/genai');
 const Chat = require('../models/Chat');
+const User = require('../models/User');
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 const MODEL_NAME = 'gemini-3.1-flash-lite';
@@ -87,10 +88,12 @@ exports.sendMessage = async (req, res) => {
     const chat = await findAndAuthorize(req.params.id, req.user.id, res);
     if (!chat) return;
 
+    const userDoc = await User.findById(req.user.id).select('name');
+
     const response = await ai.models.generateContent({
       model: MODEL_NAME,
       contents: [...buildHistory(chat.messages), { role: 'user', parts: [{ text: userMessage }] }],
-      config: { systemInstruction: buildSystemPrompt(chat, req.user, req.body.timezone) },
+      config: { systemInstruction: buildSystemPrompt(chat, userDoc, req.body.timezone) },
     });
 
     await appendAndSave(chat, userMessage, response.text);
@@ -110,6 +113,8 @@ exports.sendMessageStream = async (req, res) => {
     const chat = await findAndAuthorize(req.params.id, req.user.id, res);
     if (!chat) return;
 
+    const userDoc = await User.findById(req.user.id).select('name');
+
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
@@ -118,7 +123,7 @@ exports.sendMessageStream = async (req, res) => {
     const responseStream = await ai.models.generateContentStream({
       model: MODEL_NAME,
       contents: [...buildHistory(chat.messages), { role: 'user', parts: [{ text: userMessage }] }],
-      config: { systemInstruction: buildSystemPrompt(chat, req.user, req.body.timezone) },
+      config: { systemInstruction: buildSystemPrompt(chat, userDoc, req.body.timezone) },
     });
 
     let reply = '';
