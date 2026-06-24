@@ -1,0 +1,109 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 40px 30px;
+  box-shadow: var(--shadow);
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--color-primary);
+  letter-spacing: -0.5px;
+}
+
+.login-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.login-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.auth-alert {
+  margin-bottom: 20px !important;
+  background-color: var(--bg-input) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border);
+}
+
+.auth-alert .MuiAlert-icon {
+  color: var(--color-primary) !important;
+}
+
+.auth-input .MuiOutlinedInput-root {
+  color: var(--color-text) !important;
+  background-color: var(--bg-input) !important;
+}
+
+.auth-input .MuiInputLabel-root {
+  color: var(--color-text-secondary) !important;
+}
+
+.auth-input .MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-border) !important;
+}
+
+.auth-input:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-text-secondary) !important;
+}
+
+.auth-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-primary) !important;
+}
+
+.auth-input .MuiInputLabel-root.Mui-focused {
+  color: var(--color-primary) !important;
+}
+
+.auth-btn {
+  background-color: var(--color-primary) !important;
+  color: var(--bg-page) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  padding: 10px !important;
+  font-size: 0.95rem !important;
+  transition: opacity 0.2s ease-in-out !important;
+}
+
+.auth-btn:hover {
+  opacity: 0.9 !important;
+  background-color: var(--color-primary) !important;
+}

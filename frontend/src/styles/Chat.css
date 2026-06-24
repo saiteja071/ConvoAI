@@ -1,0 +1,34 @@
+.chat-page-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-page);
+}
+
+.chat-placeholder-container {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: var(--color-text-secondary);
+  gap: 12px;
+  background-color: var(--bg-page);
+  text-align: center;
+  padding: 24px;
+}
+
+.chat-placeholder-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.5px;
+}
+
+.chat-placeholder-subtitle {
+  font-size: 0.95rem;
+  max-width: 320px;
+  line-height: 1.5;
+}

@@ -1,0 +1,121 @@
+.message-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-row.model {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 80%;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.message-bubble.user {
+  background-color: var(--color-primary);
+  color: var(--bg-page);
+  border-radius: 18px 18px 2px 18px;
+  box-shadow: var(--shadow);
+}
+
+.user-message-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble.model {
+  color: var(--color-text);
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: 100%;
+}
+
+.message-bubble.model p {
+  margin-bottom: 12px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble.model p:last-child {
+  margin-bottom: 0;
+}
+
+.message-bubble.model ul, .message-bubble.model ol {
+  margin-bottom: 12px;
+  padding-left: 20px;
+}
+
+.message-bubble.model li {
+  margin-bottom: 4px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble.model code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble.model pre {
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 12px 0;
+  max-width: 100%;
+}
+
+.message-bubble.model pre code {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  word-break: normal;
+  white-space: pre;
+}
+
+.message-bubble.model hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 16px 0;
+  max-width: 100%;
+}
+
+.message-bubble.model a {
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble.model h1, 
+.message-bubble.model h2, 
+.message-bubble.model h3, 
+.message-bubble.model h4 {
+  color: var(--color-primary);
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.message-bubble.model h1 { font-size: 1.4rem; }
+.message-bubble.model h2 { font-size: 1.25rem; }
+.message-bubble.model h3 { font-size: 1.1rem; }
