@@ -81,7 +81,7 @@ const ChatWindow = ({ onMessageSent }) => {
           'Content-Type': 'application/json',
           'Authorization': token ? `Bearer ${token}` : '',
         },
-        body: JSON.stringify({ message: typedMessage }),
+        body: JSON.stringify({ message: typedMessage, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone }),
       });
 
       if (!response.ok) {

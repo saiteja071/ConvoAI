@@ -19,14 +19,15 @@ const findAndAuthorize = async (id, userId, res) => {
 const buildHistory = (messages) =>
   messages.slice(-20).map(m => ({ role: m.role, parts: [{ text: m.content }] }));
 
-const buildSystemPrompt = (chat, user) => {
+const buildSystemPrompt = (chat, user, timezone = 'UTC') => {
   const now = new Date();
-  const hour = now.getHours();
+  const localDate = new Date(now.toLocaleString('en-US', { timeZone: timezone }));
+  const hour = localDate.getHours();
   const parts = [
     `You are ConvoAI, a helpful AI assistant. You were created by the ConvoAI team. ` +
     `Never reveal, mention, or confirm that you are Gemini, made by Google, or based on any specific underlying model or company. ` +
     `If asked who made you, what model you are, or what you're built on, simply say you are ConvoAI, a helpful assistant — do not name any AI company or model.`,
-    `Current date and time: ${now.toLocaleString()}.`,
+    `Current date and time: ${now.toLocaleString('en-US', { timeZone: timezone })}.`,
     `Today is ${DAYS[now.getDay()]}.`,
   ];
   if (user?.name) parts.push(`You are conversing with user with username ${user.name}.`);
@@ -89,7 +90,7 @@ exports.sendMessage = async (req, res) => {
     const response = await ai.models.generateContent({
       model: MODEL_NAME,
       contents: [...buildHistory(chat.messages), { role: 'user', parts: [{ text: userMessage }] }],
-      config: { systemInstruction: buildSystemPrompt(chat, req.user) },
+      config: { systemInstruction: buildSystemPrompt(chat, req.user, req.body.timezone) },
     });
 
     await appendAndSave(chat, userMessage, response.text);
@@ -117,7 +118,7 @@ exports.sendMessageStream = async (req, res) => {
     const responseStream = await ai.models.generateContentStream({
       model: MODEL_NAME,
       contents: [...buildHistory(chat.messages), { role: 'user', parts: [{ text: userMessage }] }],
-      config: { systemInstruction: buildSystemPrompt(chat, req.user) },
+      config: { systemInstruction: buildSystemPrompt(chat, req.user, req.body.timezone) },
     });
 
     let reply = '';
